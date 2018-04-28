@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<title>Index</title>
+	</head>
+	<body>
+		<div th:if="${#httpServletRequest.isUserInRole('ADMIN')}">
+		<div  th:replace="fragments/fragment :: header"></div>
+			<h2 align="center" th:text="'Welcome ' + ${#httpServletRequest.remoteUser}"></h2>
+			<div style="padding-left: 2.7ch;">
+			<a th:if="${#httpServletRequest.isUserInRole('ADMIN')}" href="/student/viewall/">View All Student</a>
+			<p></p>
+			<label th:if="${#httpServletRequest.isUserInRole('ADMIN')}"><b>View Student by NPM</b></label>
+			<form th:if="${#httpServletRequest.isUserInRole('ADMIN')}" action="/student/view" method="get">
+				<input type="text" name="npm" placeholder="Masukan NPM"></input>
+				<p></p>
+				<button type="submit" class="btn btn-success">Save</button><br/>
+			</form>
+			</div>
+		</div>	
+		<div th:unless="${#httpServletRequest.isUserInRole('ADMIN')}">
+		<div  th:replace="fragments/fragment-user :: header"></div>
+			<h2 align="center" th:text="'Welcome ' + ${#httpServletRequest.remoteUser}"></h2>
+			<div style="padding-left: 2.7ch;">
+			<label th:if="${#httpServletRequest.isUserInRole('USER')}"><b>View Student by NPM</b></label>
+			<form th:if="${#httpServletRequest.isUserInRole('USER')}" action="/student/view" method="get">
+				<input type="text" name="npm" placeholder="Masukan NPM"></input>
+				<p></p>
+				<button type="submit" class="btn btn-success">Save</button><br/>
+			</form>
+			</div>
+		</div>
+	<div th:replace="fragments/fragment :: footer"></div>	
+	</body>
+</html> 
+                        
+                                                                                                       

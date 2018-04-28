@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>View Student by NPM</title>
+    </head>
+    <body>
+    	<div th:if="${#httpServletRequest.isUserInRole('ADMIN')}">
+		<div  th:replace="fragments/fragment :: header"></div>
+	    	<div style="padding-left: 2.7ch;">
+		    	<h2 th:text="'Login as ' + ${#httpServletRequest.remoteUser}">Login as</h2><br/>
+			    <h3 th:text="'NPM = ' + ${student.npm}">Student NPM</h3>
+			    <h3 th:text="'Name = ' + ${student.name}">Student Name</h3>
+			    <h3 th:text="'GPA = ' + ${student.gpa}">Student GPA</h3>
+			    <form th:action="@{/logout}" method="post">
+					<input type="submit" value="Sign Out" class="btn btn-success"/>
+				</form>
+			</div>    
+		</div>
+		<div th:unless="${#httpServletRequest.isUserInRole('ADMIN')}">
+		<div  th:replace="fragments/fragment-user :: header"></div>
+	    	<div style="padding-left: 2.7ch;">
+		    	<h2 th:text="'Login as ' + ${#httpServletRequest.remoteUser}">Login as</h2><br/>
+			    <h3 th:text="'NPM = ' + ${student.npm}">Student NPM</h3>
+			    <h3 th:text="'Name = ' + ${student.name}">Student Name</h3>
+			    <h3 th:text="'GPA = ' + ${student.gpa}">Student GPA</h3>
+			    <form th:action="@{/logout}" method="post">
+					<input type="submit" value="Sign Out" class="btn btn-success"/>
+				</form>
+			</div>    
+		</div>
+	<div th:replace="fragments/fragment :: footer"></div>
+    </body>
+</html>
+
+
